@@ -14,9 +14,12 @@ JLabel enter;
 JLabel highLow;
 JLabel last;
 
+Random r;
+int random;
+
 GuessingGame(){
   Random r = new Random();
-  int random = r.nextInt(100) + 1;
+  int random = r.nextInt(100)+1;
 
   JFrame frame = new JFrame("Guessing Game");
   frame.setLayout(new FlowLayout());
@@ -49,24 +52,21 @@ GuessingGame(){
 
 public void actionPerformed(ActionEvent ae){
   if(ae.getActionCommand().equals("Guess")){
-    Random r = new Random();
-    int random = r.nextInt(100) + 1;
-    int input = Integer.parseInt(userGuess.getText());
-  
-  if(userGuess == random){
-    highLow.setText("You got it!");
-    last.setText("Last guess was: " + random);
+    int guess = Integer.parseInt(userGuess.getText());
+
+  if(random > guess){
+    highLow.setText("Too high! ");
   }
-  else if(userGuess < random){
-    highLow.setText("Too low!");
-    last.setText("Last guess was: " + userGuess);
+  else if(random < guess){
+    highLow.setText("Too low! ");
   }
   else{
-    highLow.setText("Too high!");
-    last.setText("Last guess was: " + userGuess);
-  }}
+    highLow.setText("You got it! ");
+  }
+  last.setText("Last guess was: " + guess);
+  }
 
-  if(ae.getActionCommand().equals("Play Again")){
+  else if(ae.getActionCommand().equals("Play Again")){
     Random r = new Random();
     int random = r.nextInt(100) + 1;
     enter.setText("Enter your guess:");
